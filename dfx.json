@@ -3,6 +3,9 @@
     "hello": {
       "main": "backend/service/Hello.mo"
     },
+    "token": {
+      "main": "backend/service/Main.mo"
+    },
     "image": {
       "main": "backend/service/Image.mo"
     },
@@ -17,7 +20,7 @@
       "packtool": ""
     }
   },
-  "dfx": "0.9.3",
+  "dfx": "0.12.1",
   "networks": {
     "local": {
       "bind": "127.0.0.1:8000",

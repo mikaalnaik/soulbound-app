@@ -21,10 +21,13 @@
     "sync:image": "DFX_NETWORK=local && rsync -avr .dfx/$(echo ${DFX_NETWORK:-'**'})/canisters/image --exclude='idl/' --exclude='*.wasm' --delete ui/declarations"
   },
   "devDependencies": {
+    "@types/node": "18.13.0",
+    "@types/react": "18.0.27",
     "eslint": "^7.32.0",
     "eslint-config-next": "^12.0",
     "eslint-plugin-react": "^7.29",
-    "eslint-plugin-react-hooks": "^4.4"
+    "eslint-plugin-react-hooks": "^4.4",
+    "typescript": "4.9.5"
   },
   "dependencies": {
     "@dfinity/agent": "^0.11",

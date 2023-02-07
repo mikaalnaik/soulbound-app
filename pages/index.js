@@ -14,14 +14,8 @@ function HomePage() {
         <title>Internet Computer</title>
       </Head>
       <main className={styles.main}>
-        <h3 className={styles.title}>
-          Welcome to Next.js Internet Computer Starter Template!
-        </h3>
-
-        <img src="/logo.png" alt="DFINITY logo" className={styles.logo} />
-
+        <h3 className={styles.title}>Soulbound Tokens</h3>
         <GreetingSection />
-        <ImageSection />
       </main>
     </div>
   )

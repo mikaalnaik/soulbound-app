@@ -8,6 +8,11 @@ import {
   canisterId as imageCanisterId
 } from "../declarations/image"
 
+import {
+  createActor as createTokenActor,
+  canisterId as tokenCansisterId
+} from "../declarations/token"
+
 export const makeActor = (canisterId, createActor) => {
   return createActor(canisterId, {
     agentOptions: {
@@ -22,4 +27,8 @@ export function makeHelloActor() {
 
 export function makeImageActor() {
   return makeActor(imageCanisterId, createImageActor)
+}
+
+export function makeTokenActor() {
+  return makeActor(tokenCansisterId, createTokenActor)
 }
