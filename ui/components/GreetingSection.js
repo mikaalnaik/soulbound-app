@@ -57,7 +57,6 @@ export const GreetingSection = () => {
         <button onClick={checkMetadata}>Send</button>
       </section>
       <section>
-        <label>Response: &nbsp;</label>
         {loading}
         {userTokens.map(token => {
           return (
