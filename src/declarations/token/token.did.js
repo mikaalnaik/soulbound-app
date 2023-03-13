@@ -39,6 +39,11 @@ export const idlFactory = ({ IDL }) => {
     'Ok' : IDL.Record({ 'token_id' : TokenId, 'metadata_desc' : MetadataDesc }),
     'Err' : ApiError,
   });
+  const Nft = IDL.Record({
+    'id' : TokenId,
+    'owner' : IDL.Principal,
+    'metadata' : MetadataDesc,
+  });
   const MintReceiptPart = IDL.Record({ 'id' : IDL.Nat, 'token_id' : TokenId });
   const MintReceipt = IDL.Variant({ 'Ok' : MintReceiptPart, 'Err' : ApiError });
   const OwnerResult = IDL.Variant({ 'Ok' : IDL.Principal, 'Err' : ApiError });
@@ -49,7 +54,7 @@ export const idlFactory = ({ IDL }) => {
     'TransactionHistory' : IDL.Null,
     'TransferNotification' : IDL.Null,
   });
-  const Dip721NFT = IDL.Service({
+  const DIP721SBT = IDL.Service({
     'balanceOfDip721' : IDL.Func([IDL.Principal], [IDL.Nat64], ['query']),
     'burn' : IDL.Func([IDL.Principal, TokenId], [TxReceipt], []),
     'getMaxLimitDip721' : IDL.Func([], [IDL.Nat16], ['query']),
@@ -64,6 +69,7 @@ export const idlFactory = ({ IDL }) => {
         [IDL.Vec(TokenId)],
         ['query'],
       ),
+    'getTokensForUser' : IDL.Func([IDL.Principal], [IDL.Vec(Nft)], ['query']),
     'logoDip721' : IDL.Func([], [LogoResult], ['query']),
     'mintDip721' : IDL.Func([IDL.Principal, MetadataDesc], [MintReceipt], []),
     'nameDip721' : IDL.Func([], [IDL.Text], ['query']),
@@ -86,7 +92,7 @@ export const idlFactory = ({ IDL }) => {
         [],
       ),
   });
-  return Dip721NFT;
+  return DIP721SBT;
 };
 export const init = ({ IDL }) => {
   const LogoResult = IDL.Record({ 'data' : IDL.Text, 'logo_type' : IDL.Text });

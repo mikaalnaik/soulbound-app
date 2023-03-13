@@ -5,13 +5,14 @@ export type ApiError = { 'ZeroAddress' : null } |
   { 'InvalidTokenId' : null } |
   { 'Unauthorized' : null } |
   { 'Other' : null };
-export interface Dip721NFT {
+export interface DIP721SBT {
   'balanceOfDip721' : ActorMethod<[Principal], bigint>,
   'burn' : ActorMethod<[Principal, TokenId], TxReceipt>,
   'getMaxLimitDip721' : ActorMethod<[], number>,
   'getMetadataDip721' : ActorMethod<[TokenId], MetadataResult>,
   'getMetadataForUserDip721' : ActorMethod<[Principal], ExtendedMetadataResult>,
   'getTokenIdsForUserDip721' : ActorMethod<[Principal], BigUint64Array>,
+  'getTokensForUser' : ActorMethod<[Principal], Array<Nft>>,
   'logoDip721' : ActorMethod<[], LogoResult>,
   'mintDip721' : ActorMethod<[Principal, MetadataDesc], MintReceipt>,
   'nameDip721' : ActorMethod<[], string>,
@@ -65,9 +66,14 @@ export type MetadataVal = { 'Nat64Content' : bigint } |
 export type MintReceipt = { 'Ok' : MintReceiptPart } |
   { 'Err' : ApiError };
 export interface MintReceiptPart { 'id' : bigint, 'token_id' : TokenId }
+export interface Nft {
+  'id' : TokenId,
+  'owner' : Principal,
+  'metadata' : MetadataDesc,
+}
 export type OwnerResult = { 'Ok' : Principal } |
   { 'Err' : ApiError };
 export type TokenId = bigint;
 export type TxReceipt = { 'Ok' : bigint } |
   { 'Err' : ApiError };
-export interface _SERVICE extends Dip721NFT {}
+export interface _SERVICE extends DIP721SBT {}

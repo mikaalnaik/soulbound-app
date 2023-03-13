@@ -1,70 +1,56 @@
 import { useState } from "react"
 
 // Dfinity
-import { makeHelloActor } from "../service/actor-locator"
 import { makeTokenActor } from "../service/actor-locator"
 import { Principal } from "@dfinity/principal"
 
 export const GreetingSection = () => {
-  const [name, setName] = useState("")
   const [loading, setLoading] = useState("")
-  const [greetingMessage, setGreetingMessage] = useState("")
-
+  const [userTokens, setUserTokens] = useState([])
   const [userAddress, setUserAddress] = useState("")
 
-  function onChangeName(e) {
-    const newName = e.target.value
-    setName(newName)
-  }
-
-  async function sayGreeting() {
-    setGreetingMessage("")
-    setLoading("Loading...")
-
-    // const helloActor = makeHelloActor()
-    // const greeting = await helloActor.howdy(name)
-
-    const tokenActor = makeTokenActor()
-    const test = await tokenActor.getMetadataForUserDip721("sdfs")
-    // const tokenName = await tokenActor.nameDip721("sdfs")
-    console.log({ tokenName })
-
-    setLoading("")
-    setGreetingMessage(tokenName)
-  }
-
   const checkMetadata = async () => {
+    setLoading(true)
     const tokenActor = makeTokenActor()
-    const test = await tokenActor.getMetadataForUserDip721(
+    const tokenIDsBigInts = await tokenActor.getTokenIdsForUserDip721(
       Principal.fromText(userAddress)
     )
+    const x = new BigUint64Array(tokenIDsBigInts)
+    const tokenIDs = x.reduce((accum, tokenID) => {
+      accum = [...accum, Number(tokenID)]
+      return accum
+    }, [])
+    const tokenPromise = tokenIDs.map(async id => {
+      return await tokenActor.getMetadataDip721(id)
+    })
 
-    const totalSupply = await tokenActor.logoDip721()
-    console.log({ totalSupply })
-    console.log({ test })
+    const tokens = await Promise.all(tokenPromise)
+
+    console.log({ tokens })
+
+    const forDisplay = tokens.map(token => {
+      return {
+        description: token.Ok[0].key_val_data[0].val.TextContent,
+        tag: token.Ok[0].key_val_data[1].val.TextContent
+      }
+    })
+
+    console.log({ forDisplay })
+    setUserTokens(forDisplay)
+
+    setLoading(false)
   }
 
   return (
     <div>
       <section>
-        <h2>Greeting</h2>
-        <label htmlFor="name">Enter your name: &nbsp;</label>
+        <h2>Get Tokens</h2>
+        <label htmlFor="name">Enter address: &nbsp;</label>
         <input
           id="name"
           alt="Name"
           type="text"
-          value={name}
-          onChange={onChangeName}
-        />
-        <button onClick={sayGreeting}>Send</button>
-      </section>
-      <section>
-        <h2>Get Metadata for User</h2>
-        <label htmlFor="name">Enter your address: &nbsp;</label>
-        <input
-          id="name"
-          alt="Name"
-          type="text"
+          placeholder="User Address"
           value={userAddress}
           onChange={e => setUserAddress(e.target.value)}
         />
@@ -73,7 +59,14 @@ export const GreetingSection = () => {
       <section>
         <label>Response: &nbsp;</label>
         {loading}
-        {greetingMessage}
+        {userTokens.map(token => {
+          return (
+            <div>
+              <h1> {token.description}</h1>
+              <h2> {token.tag}</h2>
+            </div>
+          )
+        })}
       </section>
     </div>
   )

@@ -9,6 +9,12 @@ type OwnerResult =
    Err: ApiError;
    Ok: principal;
  };
+type Nft = 
+ record {
+   id: TokenId;
+   metadata: MetadataDesc;
+   owner: principal;
+ };
 type MintReceiptPart = 
  record {
    id: nat;
@@ -79,7 +85,7 @@ type Dip721NonFungibleToken =
    name: text;
    symbol: text;
  };
-type Dip721NFT = 
+type DIP721SBT = 
  service {
    balanceOfDip721: (principal) -> (nat64) query;
    burn: (principal, TokenId) -> (TxReceipt);
@@ -87,6 +93,7 @@ type Dip721NFT =
    getMetadataDip721: (TokenId) -> (MetadataResult) query;
    getMetadataForUserDip721: (principal) -> (ExtendedMetadataResult);
    getTokenIdsForUserDip721: (principal) -> (vec TokenId) query;
+   getTokensForUser: (principal) -> (vec Nft) query;
    logoDip721: () -> (LogoResult) query;
    mintDip721: (principal, MetadataDesc) -> (MintReceipt);
    nameDip721: () -> (text) query;
@@ -104,4 +111,4 @@ type ApiError =
    Unauthorized;
    ZeroAddress;
  };
-service : (principal, Dip721NonFungibleToken) -> Dip721NFT
+service : (principal, Dip721NonFungibleToken) -> DIP721SBT

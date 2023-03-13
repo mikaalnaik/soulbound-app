@@ -1,11 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
-// Next, React
 import Head from "next/head"
-
-import styles from "../ui/styles/Home.module.css"
-
 import { GreetingSection } from "../ui/components/GreetingSection"
-import { ImageSection } from "../ui/components/ImageSection"
+import styles from "../ui/styles/Home.module.css"
 
 function HomePage() {
   return (
