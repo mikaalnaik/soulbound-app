@@ -42,6 +42,7 @@ dfx deploy token --argument "(
 )"
 
 
+
 dfx canister call token mintDip721 \
 "(
   principal\"$MIKAAL\", 
@@ -51,6 +52,7 @@ dfx canister call token mintDip721 \
       data = blob\"Dfinity\";
       key_val_data = vec {
         record { key = \"description\"; val = variant{TextContent=\"Dfinity Grant Recipient 2022\"}; };
+        record { key = \"content\"; val = variant{TextContent=\"Awarded for work on Thentic, facilitating the production of soulbased tokens to celebrate and authenticate important achievements\"}; };
         record { key = \"tag\"; val = variant{TextContent=\"Accreditation\"}; };
         record { key = \"contentType\"; val = variant{TextContent=\"text/plain\"}; };
         record { key = \"locationType\"; val = variant{Nat8Content=4:nat8} };
@@ -65,7 +67,7 @@ dfx canister call token mintDip721 \
   vec { 
     record {
       purpose = variant{Rendered};
-      data = blob\"Mega Tour 2022\";
+      data = blob\"Rihanna\";
       key_val_data = vec {
         record { key = \"description\"; val = variant{TextContent=\"Rihanna Concert 2022\"}; };
         record { key = \"tag\"; val = variant{TextContent=\"Attendence\"}; };
@@ -82,9 +84,9 @@ dfx canister call token mintDip721 \
   vec { 
     record {
       purpose = variant{Rendered};
-      data = blob\"hello\";
+      data = blob\"Taylor Swift\";
       key_val_data = vec {
-        record { key = \"description\"; val = variant{TextContent=\"Taylor Swift Concert 2022\"}; };
+        record { key = \"description\"; val = variant{TextContent=\"Era's Tour Toronto Concert 2022\"}; };
         record { key = \"tag\"; val = variant{TextContent=\"Attendence\"}; };
         record { key = \"contentType\"; val = variant{TextContent=\"text/plain\"}; };
         record { key = \"locationType\"; val = variant{Nat8Content=4:nat8} };
@@ -98,9 +100,27 @@ dfx canister call token mintDip721 \
   vec { 
     record {
       purpose = variant{Rendered};
-      data = blob\"hello\";
+      data = blob\"University\";
       key_val_data = vec {
         record { key = \"description\"; val = variant{TextContent=\"University of Guelph 2011\"}; };
+        record { key = \"content\"; val = variant{TextContent=\"Bachelor of Science, Plant Sciences\"}; };
+        record { key = \"tag\"; val = variant{TextContent=\"Accreditation\"}; };
+        record { key = \"contentType\"; val = variant{TextContent=\"text/plain\"}; };
+        record { key = \"locationType\"; val = variant{Nat8Content=4:nat8} };
+      }
+    }
+  }
+)"
+dfx canister call token mintDip721 \
+"(
+  principal\"$MIKAAL\", 
+  vec { 
+    record {
+      purpose = variant{Rendered};
+      data = blob\"University of Guelph\";
+      key_val_data = vec {
+        record { key = \"description\"; val = variant{TextContent=\"Bachelor of Scieience 2011\"}; };
+        record { key = \"content\"; val = variant{TextContent=\"Bachelor of Science, Plant Sciences\"}; };
         record { key = \"tag\"; val = variant{TextContent=\"Accreditation\"}; };
         record { key = \"contentType\"; val = variant{TextContent=\"text/plain\"}; };
         record { key = \"locationType\"; val = variant{Nat8Content=4:nat8} };

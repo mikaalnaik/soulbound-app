@@ -1,5 +1,5 @@
 import Head from "next/head"
-import { GreetingSection } from "../ui/components/GreetingSection"
+import { TokenCheckerSection } from "../ui/components/token-checker"
 import styles from "../ui/styles/Home.module.css"
 
 function HomePage() {
@@ -9,8 +9,8 @@ function HomePage() {
         <title>Internet Computer</title>
       </Head>
       <main className={styles.main}>
-        <h3 className={styles.title}>Soulbound Tokens</h3>
-        <GreetingSection />
+        <h6 className={styles.title}>Thentic</h6>
+        <TokenCheckerSection />
       </main>
     </div>
   )

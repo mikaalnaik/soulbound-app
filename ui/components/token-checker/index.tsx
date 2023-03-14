@@ -1,16 +1,16 @@
 import { useState } from "react"
 
+import styles from './style.module.scss'
 // Dfinity
-import { makeTokenActor } from "../service/actor-locator"
+import { makeTokenActor } from "../../service/actor-locator"
 import { Principal } from "@dfinity/principal"
+import ProofCard from "../proof-card"
 
-export const GreetingSection = () => {
-  const [loading, setLoading] = useState("")
+export const TokenCheckerSection = () => {
   const [userTokens, setUserTokens] = useState([])
   const [userAddress, setUserAddress] = useState("")
 
   const checkMetadata = async () => {
-    setLoading(true)
     const tokenActor = makeTokenActor()
     const tokenIDsBigInts = await tokenActor.getTokenIdsForUserDip721(
       Principal.fromText(userAddress)
@@ -29,21 +29,30 @@ export const GreetingSection = () => {
     console.log({ tokens })
 
     const forDisplay = tokens.map(token => {
+      const tokenTitle = new TextDecoder().decode(token.Ok[0].data)
+      console.log({ tokenTitle });
+      console.log({ token });
+
+      const description = token.Ok[0].key_val_data.find(obj => obj.key === 'description')?.val?.TextContent;
+      const content = token.Ok[0].key_val_data.find(obj => obj.key === 'content')?.val?.TextContent;
+      const tag = token.Ok[0].key_val_data.find(obj => obj.key === 'tag')?.val?.TextContent;
+      console.log({ content });
       return {
-        description: token.Ok[0].key_val_data[0].val.TextContent,
-        tag: token.Ok[0].key_val_data[1].val.TextContent
+        title: tokenTitle,
+        description,
+        tag,
+        content,
       }
     })
 
     console.log({ forDisplay })
     setUserTokens(forDisplay)
 
-    setLoading(false)
   }
 
   return (
-    <div>
-      <section>
+    <div className={styles.component}>
+      <section className={styles.sidebar}>
         <h2>Get Tokens</h2>
         <label htmlFor="name">Enter address: &nbsp;</label>
         <input
@@ -56,14 +65,10 @@ export const GreetingSection = () => {
         />
         <button onClick={checkMetadata}>Send</button>
       </section>
-      <section>
-        {loading}
+      <section className={styles.grid}>
         {userTokens.map(token => {
           return (
-            <div>
-              <h1> {token.description}</h1>
-              <h2> {token.tag}</h2>
-            </div>
+            <ProofCard title={token.title} description={token.description} content={token.content} tag={token.tag} />
           )
         })}
       </section>
