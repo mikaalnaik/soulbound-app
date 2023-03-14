@@ -1,13 +1,14 @@
 {
   "name": "nextjs_ic_template",
   "version": "0.3.0",
-  "author": "Henry Chan",
-  "description": "Next.js Internet Computer Starter Template",
+  "author": "Mikaal Naik",
+  "description": "Next.js Internet Computer Soulbound Token Application",
   "keywords": [
     "nextjs",
     "internet computer",
     "icp",
     "starter",
+    "soulbound tokens",
     "dfinity"
   ],
   "scripts": {

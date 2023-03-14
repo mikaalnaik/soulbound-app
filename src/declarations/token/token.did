@@ -9,12 +9,6 @@ type OwnerResult =
    Err: ApiError;
    Ok: principal;
  };
-type Nft = 
- record {
-   id: TokenId;
-   metadata: MetadataDesc;
-   owner: principal;
- };
 type MintReceiptPart = 
  record {
    id: nat;
@@ -93,7 +87,6 @@ type DIP721SBT =
    getMetadataDip721: (TokenId) -> (MetadataResult) query;
    getMetadataForUserDip721: (principal) -> (ExtendedMetadataResult);
    getTokenIdsForUserDip721: (principal) -> (vec TokenId) query;
-   getTokensForUser: (principal) -> (vec Nft) query;
    logoDip721: () -> (LogoResult) query;
    mintDip721: (principal, MetadataDesc) -> (MintReceipt);
    nameDip721: () -> (text) query;

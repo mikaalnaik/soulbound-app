@@ -1,9 +1,8 @@
-# Next.js Internet Computer Starter Template
+# Soulbound Tokens on Internet Computer with Next.js
 
-This project provides a simple starter template for Dfinity Internet Computer using Next.js framework as frontend.
+This project provides a start template for minting Soulbound Tokens using Next.js framework as frontend.
 
 **Backend**
-
 - A simple greeting hello world canister written in Motoko
 - ImageBucket canister written in Motoko with create image, delete image and getImageById
 
@@ -12,11 +11,13 @@ This project provides a simple starter template for Dfinity Internet Computer us
 - A simple React HTML form with name input, sending it to greet canister and showing the returned result
 - An Image Upload HTML form with Pick an Image button, upload the image to image canister, loading the image back from the canister and display it using useImageObject React Hook
 
-## Live Demo in IC Mainnet 🥳
 
-https://u4gun-5aaaa-aaaah-qabma-cai.raw.ic0.app
+Local Deployment
 
-![Screenshot](/public/demo-screenshot.png)
+- run `sh scripts/build.sh`
+- run `dfx deploy frontend`
+
+
 
 ## Quick Start (Run locally)
 
@@ -177,42 +178,13 @@ Note **NEXT_PUBLIC** is the prefix used by Next.js to make env vars available to
 
 **.env.ic** is included for deployment to Internet Computer ic network which would be covered below.
 
-## Deploy to IC Network Canister
 
-The most exciting part is to deploy your Next.js / Internet Computer Dapp to production Internet Computer mainnet blockchain network.
 
-To do that you will need:
-
-- ICP tokens and convert it to [cycles](https://smartcontracts.org/docs/current/concepts/tokens-cycles/)
-- Cycles wallet
-
-Follow the [Network Deployment](https://smartcontracts.org/docs/current/developer-docs/quickstart/network-quickstart/) guide to create a wallet.  
-Dfinity offers [free cycle](https://faucet.dfinity.org/) to developers.
-
-Now, you can deploy your Next.js Dapp to Internet Computer IC network by adding **--network ic** to the dfx subcommand. We will first update our env var to point to IC network host. Then deploy the backend canister first, export Next.js static code and deploy frontend canister **hello_assets**.
-
-```bash
-cp .env.ic .env.production
-dfx deploy --network ic
-```
-
-Open Chrome and go to https://[canisterId].raw.ic0.app/  
-Replace [canisterId] by the hello_assets canister id in the IC network. You can find it by running:
-
-```bash
-dfx canister --network ic id hello_assets
-```
-
-Congratulations !! Well Done !! 👏 🚀 🎉
-
-## Troubleshooting
-
-Use Chrome Dev Tools / Console / Network. Check if the dapp uses the right canister id and hostname.
 
 ## Author
 
-Henry Chan, henry@contentfly.app
-Twitter: @kinwo
+Mikaal Naik
+Twitter: @mikaalnaik
 
 ## Contributing
 

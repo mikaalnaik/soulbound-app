@@ -28,7 +28,7 @@ echo $ADMIN
 
 dfx identity use admin
 
-dfx deploy --argument "(
+dfx deploy token --argument "(
   principal\"$ADMIN\", 
   record {
     logo = record {

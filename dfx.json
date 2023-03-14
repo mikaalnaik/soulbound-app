@@ -9,8 +9,8 @@
     "image": {
       "main": "backend/service/Image.mo"
     },
-    "hello_assets": {
-      "dependencies": ["hello"],
+    "frontend": {
+      "dependencies": ["token"],
       "source": ["out"],
       "type": "assets"
     }
